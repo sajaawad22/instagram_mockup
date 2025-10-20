@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_mockup/feed.dart';
+
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -40,7 +42,8 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                TextField(
+                TextFormField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
                       hintStyle: TextStyle(color: Colors.grey[400]),
@@ -58,7 +61,24 @@ class Login extends StatelessWidget {
                             color: Colors.grey,
                           )
                       )
+
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password cannot be empty';
+                    }
+                    if (value.length < 8) {
+                      return 'Password must be at least 8 characters';
+                    }
+                    if (!RegExp(r'(?=.*[A-Z])').hasMatch(value)) {
+                      return 'Must include at least one uppercase letter';
+                    }
+                    if (!RegExp(r'(?=.*[0-9])').hasMatch(value)) {
+                      return 'Must include at least one number';
+                    }
+                    return null;
+                  },
+
                 ),
                 SizedBox(height: 20),
                 Row(
@@ -82,7 +102,10 @@ class Login extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.push( context,
+                            MaterialPageRoute(builder: (context) => Feed()));
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(16.0),
                         backgroundColor: Colors.blue,
@@ -133,7 +156,7 @@ class Login extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height:50 ),
-            
+
                 Divider(),
                 
                 Text("Instagram OT Facebook", style: TextStyle(color: Colors.grey),)

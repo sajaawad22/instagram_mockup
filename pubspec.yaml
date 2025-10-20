@@ -60,6 +60,27 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/instagram-seeklogo.png
+    - images/feed1.png
+    - images/feed2.png
+    - images/sport.png
+    - images/friends.png
+    - images/design.png
+    - images/one.png
+    - images/two.png
+    - images/three.png
+    - images/four.png
+    - images/five.png
+    - images/six.png
+    - images/seven.png
+
+    - images/nine.png
+    - images/jacob.png
+    - images/joshua.png
+    - images/story.png
+    - images/story1.png
+    - images/story2.png
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
