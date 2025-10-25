@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_mockup/profilegrid.dart';
 import'package:instagram_mockup/stories.dart';
 import'package:instagram_mockup/highlights.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Profile extends StatelessWidget{
    Profile({super.key});
@@ -14,7 +15,7 @@ class Profile extends StatelessWidget{
       "images/seven.png","images/one.png","images/two.png",
     ];
     final highlights=<StoriesAvatar>[
-      StoriesAvatar(username: "New", avatarUrl: '', ),
+      StoriesAvatar(username: "New", avatarUrl: "" ),
       StoriesAvatar(username: "Friends", avatarUrl: "images/friends.png"),
       StoriesAvatar(username: "Sports",avatarUrl: "images/sport.png"),
       StoriesAvatar(username: "designs", avatarUrl: "images/design.png")
@@ -168,7 +169,7 @@ Padding(
       items: [
         BottomNavigationBarItem(icon:Icon (Icons.home),label: ''),
         BottomNavigationBarItem(icon:Icon (Icons.search),label:''),
-        BottomNavigationBarItem(icon: Icon(Icons.ondemand_video),label:''),
+        BottomNavigationBarItem(icon: SvgPicture.asset("images/reel.svg", width: 24, height: 24,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),),label:''),
         BottomNavigationBarItem(icon: Icon(Icons.favorite_border),label:''),
         BottomNavigationBarItem(icon: Icon (Icons.account_circle_rounded),label:''),
 

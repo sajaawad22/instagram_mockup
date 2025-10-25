@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import"package:instagram_mockup/profile.dart";
 import'package:instagram_mockup/stories.dart';
 import'package:instagram_mockup/postcard.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -14,7 +15,7 @@ class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stories=[
-      StoriesAvatar(username: "joshua_l", avatarUrl: "images/joshua.png"),
+      StoriesAvatar(username: "jacob", avatarUrl: "images/jacob.png"),
       StoriesAvatar(username: "craig_love", avatarUrl: "images/story.png"),
       StoriesAvatar(username: "zackjohn",avatarUrl: "images/story1.png"),
       StoriesAvatar(username: "karenne", avatarUrl: "images/story2.png")
@@ -50,12 +51,31 @@ class Feed extends StatelessWidget {
          backgroundColor: Colors.white,
          leading: Icon(Icons.camera_alt_outlined),
          actions: [
-           IconButton(
-             icon: Icon(Icons.live_tv),
-             color: Colors.black,
+
+       IconButton(
+
              onPressed: () {
                //
              },
+         icon:Stack(
+           clipBehavior: Clip.none,
+           children: [
+             SvgPicture.asset("images/shape1.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),
+             ),
+             Positioned(right:-2,top:-2,
+                 child:Container(
+                   width:8,
+                   height:8,
+                   decoration: BoxDecoration(
+                     color: Colors.red,
+                     shape: BoxShape.circle
+                   ),
+
+                 ) )
+
+
+           ]
+         )
            ),
            IconButton(
              icon: Icon(Icons.send),
@@ -124,9 +144,10 @@ class Feed extends StatelessWidget {
      items: [
       BottomNavigationBarItem(icon:Icon (Icons.home),label: ''),
       BottomNavigationBarItem(icon:Icon (Icons.search),label:''),
-      BottomNavigationBarItem(icon: Icon(Icons.ondemand_video),label:''),
+      BottomNavigationBarItem(icon: SvgPicture.asset("images/reel.svg", width: 24, height: 24,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),),label:''),
       BottomNavigationBarItem(icon: Icon(Icons.favorite_border),label:''),
-      BottomNavigationBarItem(icon: Icon (Icons.account_circle_rounded),label:''),
+      BottomNavigationBarItem(icon: CircleAvatar(radius:12,
+      backgroundImage: AssetImage("images/jacob.png"),),label:''),
 
           ],),
     );

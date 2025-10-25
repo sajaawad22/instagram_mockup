@@ -152,20 +152,34 @@ class Login extends StatelessWidget {
                     Text("Don't have an account?", style: TextStyle(color: Colors.grey),),
                     TextButton(
                         onPressed: (){},
-                        child: Text("Sign up.", style: TextStyle(color: Colors.blue),))
+                        child: Text("Sign up.", style: TextStyle(color: Colors.blue),
+                        ),
+                    ),
+
                   ],
                 ),
-                SizedBox(height:50 ),
 
-                Divider(),
                 
-                Text("Instagram OT Facebook", style: TextStyle(color: Colors.grey),)
+
             
             
             
               ],
             ),
           ),
+        ),
+      ),
+            bottomNavigationBar:
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                Divider(),
+                SizedBox(height: 8),
+                Text(
+                  "Instagram OT Facebook",
+                  style: TextStyle(color: Colors.grey),),],
         ),
       ),
     );

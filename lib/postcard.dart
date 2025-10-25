@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class Postcard extends StatelessWidget {
   final String username;
@@ -54,7 +56,25 @@ class Postcard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment:CrossAxisAlignment.center,
+                    children:[
+
                     Text(username, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(width:6),
+                    InkWell(
+                      onTap: () {
+                        // Handle location tap
+                      },
+
+                      child:
+                        SvgPicture.asset("images/shape.svg", width: 18, height: 18,
+                          colorFilter: const ColorFilter.mode(Colors.blue,BlendMode.srcIn),
+                        ),
+                        ),
+                      ],
+                    ),
                     if (location != null)
                       Text(location!, style: const TextStyle(color: Colors.grey, fontSize: 12)),
                   ],
@@ -101,9 +121,16 @@ class Postcard extends StatelessWidget {
                 color: isLiked ? Colors.red : null,
                 onPressed: () {},
               ),
-              IconButton(icon: const Icon(Icons.comment_outlined), onPressed: () {}),
+              IconButton(icon: SvgPicture.asset("images/comment.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
               IconButton(icon: const Icon(Icons.send), onPressed: () {}),
-              const Spacer(),
+              const Spacer(
+                flex: 1,
+              ),
+              if (pageCount != null)
+              IconButton(icon:SvgPicture.asset("images/pagination.svg", width: 15, height: 15,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)),onPressed: (){}),
+              const Spacer(
+                flex: 2,
+              ),
               IconButton(icon: const Icon(Icons.bookmark_border), onPressed: () {}),
             ],
           ),
