@@ -10,15 +10,15 @@ class Profile extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final gridImages = <String>[
-      "images/one.png","images/two.png","images/three.png",
-      "images/four.png","images/five.png","images/six.png",
-      "images/seven.png","images/one.png","images/two.png",
+      "assets/images/one.png","assets/images/two.png","assets/images/three.png",
+      "assets/images/four.png","assets/images/five.png","assets/images/six.png",
+      "assets/images/seven.png","assets/images/one.png","assets/images/two.png",
     ];
     final highlights=<StoriesAvatar>[
       StoriesAvatar(username: "New", avatarUrl: "" ),
-      StoriesAvatar(username: "Friends", avatarUrl: "images/friends.png"),
-      StoriesAvatar(username: "Sports",avatarUrl: "images/sport.png"),
-      StoriesAvatar(username: "designs", avatarUrl: "images/design.png")
+      StoriesAvatar(username: "Friends", avatarUrl: "assets/images/friends.png"),
+      StoriesAvatar(username: "Sports",avatarUrl: "assets/images/sport.png"),
+      StoriesAvatar(username: "designs", avatarUrl: "assets/images/design.png")
 
     ];
 
@@ -27,13 +27,17 @@ class Profile extends StatelessWidget{
       appBar: AppBar(
 
 
-              title: Row(
-                children: [
-                  IconButton(onPressed: (){}, icon: Icon(Icons.lock)),
-                  Text("jacob_l"),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.keyboard_arrow_down_sharp))
+              title: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(onPressed: (){}, icon: Icon(Icons.lock)),
+                    Text("jacob_l"),
+                    IconButton(onPressed: (){}, icon: Icon(Icons.keyboard_arrow_down_sharp))
 
-                ],
+                  ],
+                ),
               ),
         centerTitle: true,
 
@@ -51,7 +55,7 @@ class Profile extends StatelessWidget{
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: Image.asset("images/jacob.png").image,
+                  backgroundImage: Image.asset("assets/images/jacob.png").image,
 
                 ),
                 SizedBox(width: 20,),
@@ -93,9 +97,27 @@ child: Align(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children:[
-      Text("jacob west",style:TextStyle(fontWeight: FontWeight.bold)),
-      Text("digital goods designer @pksellz"),
-      Text("everything is designed"),
+      Text("jacob west", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+
+  RichText(
+  text: TextSpan(
+  children: [
+    TextSpan(
+    text: "digital goods designer ",
+    style: TextStyle(color: Colors.black), // normal text
+  ),
+    TextSpan(
+      text: "@pksellz",
+      style: TextStyle(
+        color: Colors.blue, // 👈 only @pksellz is blue
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+],),
+),
+      Text("everything is designed", style: TextStyle(color: Colors.black),),
+
+
     ]
   )
 )
@@ -104,11 +126,18 @@ child: Align(
   child: SizedBox(width: double.infinity,
     child: OutlinedButton(
       onPressed: (){},
-    child: Text("Edit Profile"),),
+    child: Text("Edit Profile", style: TextStyle(color: Colors.black)),
+
+    style: OutlinedButton.styleFrom(
+      side: BorderSide(color: Colors.white),
+
+
+    )),
 
   ),
 
   ),
+         SizedBox(height:12),
          SizedBox(height: 120,
            child: HighLights(highlights: highlights),),
 Padding(
@@ -121,14 +150,9 @@ Padding(
     child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      IconButton(onPressed: (){}, icon: Icon(Icons.grid_3x3)),
-      Container(
-        height: 40,
-        width: 2,
-        color: Colors.grey,
-      ),
-      IconButton(onPressed: (){}, icon: Icon(Icons.person_pin_sharp)),
+      IconButton(onPressed: (){}, icon: SvgPicture.asset("assets/icons/gridicon.svg", width: 24, height: 24,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),),),
 
+      IconButton(onPressed: (){}, icon: SvgPicture.asset("assets/icons/tagsicon.svg", width: 24, height: 24,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),),),
     ],
 
   ),
@@ -169,7 +193,7 @@ Padding(
       items: [
         BottomNavigationBarItem(icon:Icon (Icons.home),label: ''),
         BottomNavigationBarItem(icon:Icon (Icons.search),label:''),
-        BottomNavigationBarItem(icon: SvgPicture.asset("images/reel.svg", width: 24, height: 24,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),),label:''),
+        BottomNavigationBarItem(icon: SvgPicture.asset("assets/icons/reel.svg", width: 24, height: 24,colorFilter: const ColorFilter.mode(Colors.black,BlendMode.srcIn),),label:''),
         BottomNavigationBarItem(icon: Icon(Icons.favorite_border),label:''),
         BottomNavigationBarItem(icon: Icon (Icons.account_circle_rounded),label:''),
 

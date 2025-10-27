@@ -20,23 +20,23 @@ class Login extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 20),
-                Image.asset("images/instagram-seeklogo.png", scale: 10,),
+                Image.asset("assets/images/instagramseeklogo.png", scale: 10,),
                 SizedBox(height: 30),
                 TextField(
                   decoration: InputDecoration(
                     hintText: "Email",
                     hintStyle: TextStyle(color: Colors.grey[400]),
                     filled: true,
-                    fillColor: Colors.grey[200],
+                    fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: Colors.white,
                       )
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: Colors.white,
                       )
                     )
                   ),
@@ -48,11 +48,11 @@ class Login extends StatelessWidget {
                     hintText: "Password",
                       hintStyle: TextStyle(color: Colors.grey[400]),
                       filled: true,
-                      fillColor: Colors.grey[200],
+                      fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: Colors.white,
                       )
 
                     ),

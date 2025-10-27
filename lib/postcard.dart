@@ -37,7 +37,7 @@ class Postcard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.grey[300]!),
+        border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
@@ -69,7 +69,7 @@ class Postcard extends StatelessWidget {
                       },
 
                       child:
-                        SvgPicture.asset("images/shape.svg", width: 18, height: 18,
+                        SvgPicture.asset("assets/icons/shape.svg", width: 18, height: 18,
                           colorFilter: const ColorFilter.mode(Colors.blue,BlendMode.srcIn),
                         ),
                         ),
@@ -117,21 +117,21 @@ class Postcard extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border),
+                icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border, ),
                 color: isLiked ? Colors.red : null,
                 onPressed: () {},
               ),
-              IconButton(icon: SvgPicture.asset("images/comment.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.send), onPressed: () {}),
+              IconButton(icon: SvgPicture.asset("assets/icons/comment.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
+              IconButton(icon:SvgPicture.asset("assets/icons/messanger.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
               const Spacer(
                 flex: 1,
               ),
               if (pageCount != null)
-              IconButton(icon:SvgPicture.asset("images/pagination.svg", width: 15, height: 15,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)),onPressed: (){}),
+              IconButton(icon:SvgPicture.asset("assets/icons/pagination.svg", width: 7, height: 7,colorFilter: const ColorFilter.mode(Colors.blue,BlendMode.srcIn)),onPressed: (){}),
               const Spacer(
                 flex: 2,
               ),
-              IconButton(icon: const Icon(Icons.bookmark_border), onPressed: () {}),
+              IconButton(icon:SvgPicture.asset("assets/icons/save.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
             ],
           ),
 
@@ -153,23 +153,20 @@ class Postcard extends StatelessWidget {
           // CAPTION
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
+            child: Text.rich(
+              TextSpan(
               children: [
-                Text(username, style: const TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
+                TextSpan(
+                text:username, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan( text:
                     caption,
-                    maxLines: 2,
-                    softWrap: true,
                     style: const TextStyle(color: Colors.grey),
                   ),
-                ),
+
               ],
             ),
-          ),
+            ),
+              ),
 
           const SizedBox(height: 4),
 
@@ -179,8 +176,8 @@ class Postcard extends StatelessWidget {
             child: Text(dateText),
           ),
 
-          const SizedBox(height: 8),
-          const Divider(thickness: 0.5, color: Colors.grey),
+          //const SizedBox(height: 8),
+          //const Divider(thickness: 0.5, color: Colors.grey),
         ],
       ),
     );
