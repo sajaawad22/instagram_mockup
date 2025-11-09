@@ -36,7 +36,7 @@ class Postcard extends StatefulWidget {
 
 class _PostcardState extends State<Postcard> {
 int currentPage=0;
-late bool _isLiked;
+bool _isLiked = false;
 
 void initState(){
   super.initState();
