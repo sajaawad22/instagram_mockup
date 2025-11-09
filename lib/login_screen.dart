@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_mockup/feed.dart';
+import 'package:instagram_mockup/feed_screen.dart';
 
 
 class Login extends StatelessWidget {
-  const Login({super.key});
+   Login({super.key});
+  final formkey = GlobalKey<FormState>();
+  final TextEditingController passwordCtrl =TextEditingController();
+
+  final String passwordPattern= r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$&*~]).+$';
+
 
   @override
   Widget build(BuildContext context) {
+    RegExp passwordRegex = RegExp(passwordPattern);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -17,6 +23,7 @@ class Login extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: SingleChildScrollView(
+            child:Form(key: formkey,
             child: Column(
               children: [
                 SizedBox(height: 20),
@@ -24,8 +31,8 @@ class Login extends StatelessWidget {
                 SizedBox(height: 30),
                 TextField(
                   decoration: InputDecoration(
-                    hintText: "Email",
-                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    hintText: "asad_khasanov",
+                    hintStyle: TextStyle(color: Colors.black),
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -43,6 +50,7 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: passwordCtrl,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
@@ -67,19 +75,17 @@ class Login extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return 'Password cannot be empty';
                     }
-                    if (value.length < 8) {
-                      return 'Password must be at least 8 characters';
-                    }
-                    if (!RegExp(r'(?=.*[A-Z])').hasMatch(value)) {
-                      return 'Must include at least one uppercase letter';
-                    }
-                    if (!RegExp(r'(?=.*[0-9])').hasMatch(value)) {
-                      return 'Must include at least one number';
+                    if(!passwordRegex.hasMatch(value)){
+                      return 'Password must include:\n'
+                          '1 uppercase letter\n'
+                          '1 lowercase letter\n'
+                          '1 special character ';
+
                     }
                     return null;
                   },
-
                 ),
+
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -103,8 +109,16 @@ class Login extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: (){
+                        if (formkey.currentState!.validate()){
                         Navigator.push( context,
-                            MaterialPageRoute(builder: (context) => Feed()));
+                            MaterialPageRoute(builder: (context) => Feed()),
+                        );
+                      } else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Invalid password")
+                          ,),
+                        );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.all(16.0),
@@ -166,6 +180,7 @@ class Login extends StatelessWidget {
             
               ],
             ),
+            ),
           ),
         ),
       ),
@@ -179,7 +194,9 @@ class Login extends StatelessWidget {
                 SizedBox(height: 8),
                 Text(
                   "Instagram OT Facebook",
-                  style: TextStyle(color: Colors.grey),),],
+                  style: TextStyle(color: Colors.grey),
+                ),
+                ],
         ),
       ),
     );

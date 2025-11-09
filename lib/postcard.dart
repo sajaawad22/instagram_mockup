@@ -4,31 +4,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
-class Postcard extends StatelessWidget {
+class Postcard extends StatefulWidget {
   final String username;
   final String avatarAsset;
-  final String mediaAsset;
+
   final String caption;
   final String dateText;
-  final String? location;   // optional
-  final String? likesText;  // optional
+  final String? location;
+  final String? likesText;
   final bool isLiked;
-  final int? pageCount;     // optional
-  final int? pageIndex;     // optional
+
+
+  final List<String> images;
 
   const Postcard({
     super.key,
     required this.username,
     required this.avatarAsset,
-    required this.mediaAsset,
+
     required this.caption,
     required this.dateText,
     this.location,
     this.likesText,
     this.isLiked = false,
-    this.pageCount,
-    this.pageIndex,
+
+    required this.images,
   });
+  @override
+  State<Postcard> createState() => _PostcardState();
+}
+
+class _PostcardState extends State<Postcard> {
+int currentPage=0;
+late bool _isLiked;
+
+void initState(){
+  super.initState();
+  _isLiked=widget.isLiked;
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +64,7 @@ class Postcard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundImage: AssetImage(avatarAsset),
+                  backgroundImage: AssetImage(widget.avatarAsset),
                 ),
                 const SizedBox(width: 10),
                 Column(
@@ -61,7 +75,7 @@ class Postcard extends StatelessWidget {
                     crossAxisAlignment:CrossAxisAlignment.center,
                     children:[
 
-                    Text(username, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(widget.username, style: const TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(width:6),
                     InkWell(
                       onTap: () {
@@ -75,8 +89,8 @@ class Postcard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (location != null)
-                      Text(location!, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                    if (widget.location != null)
+                      Text(widget.location!, style: const TextStyle(color: Colors.grey, fontSize: 12)),
                   ],
                 ),
                 const Spacer(),
@@ -91,9 +105,20 @@ class Postcard extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: Image.asset(mediaAsset, fit: BoxFit.cover),
-                ),
-                if (pageIndex != null && pageCount != null)
+                  child:PageView.builder(
+                    itemCount:widget.images.length,
+                    onPageChanged: (index){
+                      setState(() => currentPage = index);
+                      },
+
+                    itemBuilder: (context,index){
+                      return Image.asset(
+                      widget.images[index],
+                        fit: BoxFit.cover,);
+                  },
+
+                  ), ),
+                if (widget.images.length > 1)
                   Positioned(
                     top: 8,
                     right: 8,
@@ -104,7 +129,7 @@ class Postcard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        "${pageIndex! + 1}/$pageCount",
+                        "${currentPage + 1}/${widget.images.length}",
                         style: const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
@@ -117,16 +142,20 @@ class Postcard extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border, ),
-                color: isLiked ? Colors.red : null,
-                onPressed: () {},
+                icon: Icon(_isLiked ? Icons.favorite : Icons.favorite_border, ),
+                color: _isLiked ? Colors.red : null,
+                onPressed: () {
+                  setState(() {
+                    _isLiked = !_isLiked;
+                  });
+                },
               ),
               IconButton(icon: SvgPicture.asset("assets/icons/comment.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
               IconButton(icon:SvgPicture.asset("assets/icons/messanger.svg", width: 22, height: 22,colorFilter: const ColorFilter.mode(Colors.grey,BlendMode.srcIn)), onPressed: () {}),
               const Spacer(
                 flex: 1,
               ),
-              if (pageCount != null)
+              if (widget.images.length >1)
               IconButton(icon:SvgPicture.asset("assets/icons/pagination.svg", width: 7, height: 7,colorFilter: const ColorFilter.mode(Colors.blue,BlendMode.srcIn)),onPressed: (){}),
               const Spacer(
                 flex: 2,
@@ -136,14 +165,14 @@ class Postcard extends StatelessWidget {
           ),
 
           // LIKES (optional)
-          if (likesText != null)
+          if (widget.likesText != null)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
                   const CircleAvatar(radius: 10),
                   const SizedBox(width: 8),
-                  Flexible(child: Text(likesText!)),
+                  Flexible(child: Text(widget.likesText!)),
                 ],
               ),
             ),
@@ -157,10 +186,10 @@ class Postcard extends StatelessWidget {
               TextSpan(
               children: [
                 TextSpan(
-                text:username, style: const TextStyle(fontWeight: FontWeight.bold)),
+                text:widget.username, style: const TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan( text:
-                    caption,
-                    style: const TextStyle(color: Colors.grey),
+                  widget.caption,
+                    style: const TextStyle(color: Colors.black),
                   ),
 
               ],
@@ -173,7 +202,7 @@ class Postcard extends StatelessWidget {
           // DATE
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Text(dateText),
+            child: Text(widget.dateText , style: const TextStyle(color: Colors.grey)),
           ),
 
           //const SizedBox(height: 8),

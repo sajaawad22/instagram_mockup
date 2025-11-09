@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import"package:instagram_mockup/profile.dart";
+import"package:instagram_mockup/profile_screen.dart";
 import'package:instagram_mockup/stories.dart';
 import'package:instagram_mockup/postcard.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,23 +26,29 @@ class Feed extends StatelessWidget {
         username:"joushua_l",
         location:"Tokyo,japan",
         avatarAsset: "assets/images/joshua.png",
-        mediaAsset:"assets/images/feed1.png",
+
         caption:"the game in japan was amazing and i want to share some photos",
         dateText:"septemper 19",
         likesText:"liked by crag_love and 44,686 others",
         isLiked: true,
-        pageCount: 3,
-        pageIndex: 0,
+        images: [
+          "assets/images/feed1.png",
+              "assets/images/feed1.png",
+              "assets/images/feed1.png",
+        ],
 
       ),
       Postcard(
         username:"joushua_l",
         location:"Tokyo,japan",
         avatarAsset: "assets/images/joshua.png",
-        mediaAsset:"assets/images/feed2.png",
+
         caption:"the game in japan was amazing and i want to share some photos",
         dateText:"septemper 19",
         likesText:"liked by crag_love and 44,686 others",
+        images: [
+          "assets/images/feed2.png"
+        ],
 
       )];
     return Scaffold(
